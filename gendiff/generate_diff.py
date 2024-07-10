@@ -24,5 +24,3 @@ def generate_diff(path_to_file1, path_to_file2):
 
 path_to_file_1 = '/home/georgiy/python-project-50/gendiff/file1.json'
 path_to_file_2 = '/home/georgiy/python-project-50/gendiff/file2.json'
-
-
