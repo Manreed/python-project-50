@@ -11,4 +11,6 @@ jobs:
         run: poetry install
       - name: Run flake8
         run: poetry run flake8 gendiff
+      - name: Run tests
+        run: poetry run test
 
