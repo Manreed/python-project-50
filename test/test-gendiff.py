@@ -1,9 +1,12 @@
 from gendiff.generate_diff import generate_diff
+import os
 
 
 def test_gendiff():
-    assert generate_diff("/home/georgiy/python-project-50/test/files/test1.json",
-                         "/home/georgiy/python-project-50/test/files/test2.json") == """{
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file1 = os.path.join(current_dir, 'files', 'test1.json')
+    file2 = os.path.join(current_dir, 'files', 'test2.json')
+    assert generate_diff(file1, file2) == """{
 + follow: False
 - host: github.io
 + host: hexlet.io
@@ -14,8 +17,10 @@ def test_gendiff():
 
 
 def test_gendiff_identical_files():
-    assert generate_diff("/home/georgiy/python-project-50/test/files/test1.json",
-                         "/home/georgiy/python-project-50/test/files/test1.json") == """{
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file1 = os.path.join(current_dir, 'files', 'test1.json')
+    file2 = os.path.join(current_dir, 'files', 'test1.json')
+    assert generate_diff(file1, file2) == """{
   host: github.io
   timeout: 50
   type: normal
