@@ -13,4 +13,8 @@ jobs:
         run: poetry run flake8 gendiff
       - name: Run tests
         run: poetry run test
+      - name: Set code coverage commit status 📫
+        run: npx -p check-code-coverage set-gh-status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
