@@ -24,10 +24,9 @@ jobs:
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v8.0.0
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
         with:
-          coverageCommand: poetry run pytest --cov=gendiff --cov-report=xml
-          coverageLocations: coverage.xml
-          debug: true
-
+          coverageCommand: mvn test
+          coverageLocations: ${{github.workspace}}/target/site/jacoco/jacoco.xml:jacoco
 
