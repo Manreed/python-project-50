@@ -13,8 +13,11 @@ jobs:
         run: poetry run flake8 gendiff
       - name: Run tests
         run: poetry run test
-      - name: Set code coverage commit status 📫
-        run: npx -p check-code-coverage set-gh-status
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v8.0.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+        with:
+          coverageCommand: npm run coverage
+          debug: true
 
