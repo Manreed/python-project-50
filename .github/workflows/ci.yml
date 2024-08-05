@@ -1,23 +1,33 @@
 name: hello-world
+
 on: push
+
 jobs:
   my-job:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
+
       - name: Install Poetry
         run: curl -sSL https://install.python-poetry.org | python3 -
+
       - name: Install dependencies
         run: poetry install
+
       - name: Run flake8
         run: poetry run flake8 gendiff
+
       - name: Run tests
-        run: poetry run test
+        run: poetry run pytest --cov=gendiff --cov-report=xml
+
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v8.0.0
         env:
-          CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: npm run coverage
+          coverageCommand: poetry run pytest --cov=gendiff --cov-report=xml
+          coverageLocations: coverage.xml
           debug: true
+
 
